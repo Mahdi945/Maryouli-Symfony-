@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+ #index-page {
+            background: url('/images/cap8.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .navbar-custom {
+        background-color: #87CEEB;
+    }
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+        font-size: 1.2em;
+    }
+    .navbar-custom .navbar-nav .nav-item {
+        margin-right: 1rem;
+    }
+    .navbar-custom .fab {
+        font-size: 1.5em;
+    }
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+}
+
+h1 {
+    color: #444;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2.5em;
+}
+
+ form {
+        width: 100%; /* Ajustez cette valeur selon vos besoins */
+        max-width: 800px; /* Ajustez cette valeur selon vos besoins */
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+    }
+
+form div {
+    margin-bottom: 15px;
+}
+
+form div label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+form div input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Assurez-vous que la largeur inclut le padding et la bordure */
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+form button:hover {
+    background-color: #2980b9;
+}
+  .form-check-input {
+        margin-right: 50px;
+    }
+     .form-check-label {
+        margin-left: -20px; /* Ajustez cette valeur selon vos besoins */
+    }
+</style>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="{{ path('app_login') }}">
+            <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active mx-2">
+                    <a class="nav-link" href="{{ path('app_index') }}" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                 <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-2">
+                    <a href="{{ path('app_login') }}" class="nav-link" style="font-size: 1.2em;">Se connecter</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="{{ path('app_register') }}" class="nav-link" style="font-size: 1.2em;">S'inscrire</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="https://www.facebook.com" target="_blank" class="nav-link"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="https://www.instagram.com" target="_blank" class="nav-link"><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav> <br>
+
+
+{% endblock %}
+
+{% block body %}
+<body id="index-page">
+
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                {{ form_start(registrationForm) }}
+                    <h1 class="text-center">Inscription</h1>
+
+                    {{ form_errors(registrationForm) }}
+
+                    {{ form_row(registrationForm.nom) }}
+                    {{ form_row(registrationForm.prenom) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+            <div class="form-check">
+   
+    {{ form_widget(registrationForm.agreeTerms, { 'attr': {'class': 'form-check-input'} }) }}
+    {{ form_label(registrationForm.agreeTerms, 'J\'accepte les termes et conditions', { 'label_attr': {'class': 'form-check-label'} }) }}
+</div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Inscription</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

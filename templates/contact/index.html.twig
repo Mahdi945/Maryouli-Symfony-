@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contactez-nous{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #contact-page {
+            background: url('/images/cap7.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+                        background: #f2f2f2; /* Couleur de fond légèrement plus foncée que le blanc */
+
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .contact-header h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+        }
+       
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #007bff;
+        }
+        .contact-form button {
+            align-self: center;
+            padding: 0.75rem 2rem;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+         .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .social-media {
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+         .social-media a {
+            color: #007bff;
+            font-size: 1.9rem;
+        }
+        .navbar-custom {
+            background-color: #87CEEB;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .navbar-custom .navbar-nav .nav-item {
+            margin-right: 1rem;
+        }
+        .navbar-custom .fab {
+            font-size: 1.5em;
+        }
+    </style>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="/">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="/" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+             <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+        <li class="nav-item mx-2">
+                <a href="{{ path('cart_index') }}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="/logout" class="nav-link" style="font-size: 1.2em;">Déconnexion</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav> <br>
+{% endblock %}
+{% block body %}
+<body id="contact-page">
+<div class="contact-container">
+    <div class="contact-header">
+        <h1>Contactez-nous</h1>
+    </div>
+    <form class="contact-form" method="post" action="{{ path('app_contact') }}">
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="subject">Sujet</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+         <div class="form-group">
+            <button type="submit">Envoyer</button>
+        </div>
+        <div class="form-group">
+            <p>Voici nos comptes de médias sociaux :</p>
+            <div class="social-media">
+                <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+       
+    </form>
+</div>
+</body>
+{% endblock %}
+

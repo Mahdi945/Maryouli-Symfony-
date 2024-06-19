@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+        
+     .navbar-custom {
+        background-color: #87CEEB;
+    }
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+        font-size: 1.2em;
+    }
+    .navbar-custom .navbar-nav .nav-item {
+        margin-right: 1rem;
+    }
+    .navbar-custom .fab {
+        font-size: 1.5em;
+    }
+    .table {
+        margin-top: 20px;
+        margin-left: 5%; /* Décalez le tableau vers la droite */
+        border-collapse: collapse;
+        width: 90%; /* Réduisez la largeur du tableau */
+        
+    }
+        .table thead {
+        background-color: #87CEEB;
+        color: #fff;
+    }
+
+    .table th {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table tr:hover {background-color: #f5f5f5;}
+       .slider {
+        width: 300px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .slide-track {
+        width: calc(300px * 2);
+        animation: scroll 5s linear infinite;
+    }
+
+    .slide {
+        width: 300px;
+        float: left;
+    }
+
+    @keyframes scroll {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-300px * 1)); }
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+    $(document).ready(function() {
+        var typed = new Typed('#typed', {
+            stringsElement: '#typed-strings',
+            typeSpeed: 30,
+            backSpeed: 30,
+            loop: true
+        });
+    });
+</script>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-2">
+                <a class="nav-link" href="{{ path('app_gestion_produit') }}" style="font-size: 1.2em;">Gestion des produits</a>
+            </li>
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{{ path('app_produit') }}" style="font-size: 1.2em;">Ajouter produit <span class="sr-only">(current)</span></a>
+            </li>
+            
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="{{ path('app_gestion_utilisateurs') }}" style="font-size: 1.2em;">Gestion des utilisateurs</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-2">
+                <a href="{{ path('app_index') }}" class="nav-link" style="font-size: 1.2em;">Espace client</a>
+            </li>
+        </ul>
+    </div>
+</nav> <br>
+{% endblock %}
+{% block body %}
+<body id="index-page">
+<div class="container">
+    <div id="typed-strings">
+        <p style="font-size: 2em;">Liste des produits</p>
+    </div>
+    <span id="typed" style="font-size: 2em;"></span>
+</div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Taille</th>
+                <th>Prix</th>
+                <th>Equipe</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.taille }}</td>
+                    <td>{{ produit.prix }}</td>
+                    <td>{{ produit.equipe }}</td>
+                    <td>
+                        
+                        <a href="{{ path('app_gestion_produit_delete', { 'id': produit.id }) }}" class="btn btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+{% endblock %}

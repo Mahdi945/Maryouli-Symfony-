@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se Connecter{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+<style>
+ #index-page {
+            background: url('/images/cap8.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+
+form {
+    background: #f7f7f7;
+    max-width: 480px; /* Augmenter la largeur maximale du formulaire */
+    margin: 0 auto;
+    padding: 30px 40px; /* Augmenter le padding pour plus d'espace */
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 15px; /* Augmenter le padding pour plus d'espace */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px; /* Augmenter la taille de la police */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+form .btn {
+    display: block;
+    width: 100%;
+    padding: 15px; /* Augmenter le padding pour plus d'espace */
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+    font-size: 20px; /* Augmenter la taille de la police */
+    transition: background-color 0.2s ease;
+}
+
+form .btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+form .mb-3 {
+    color: #888;
+    font-size: 14px;
+}
+
+form .mb-3 a {
+    color: #007bff;
+}
+
+.navbar-custom {
+    background-color: #87CEEB;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-nav .nav-link {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.navbar-custom .navbar-nav .nav-item {
+    margin-right: 1rem;
+}
+
+.navbar-custom .fab {
+    font-size: 1.5em;
+}
+</style>
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="{{ path('app_login') }}">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{{ path('app_index') }}" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+             <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-2">
+                <a href="{{ path('app_login') }}" class="nav-link" style="font-size: 1.2em;">Se connecter</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="{{ path('app_register') }}" class="nav-link" style="font-size: 1.2em;">S'inscrire</a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="https://www.facebook.com" target="_blank" class="nav-link"><i class="fab fa-facebook-f"></i></a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="https://www.instagram.com" target="_blank" class="nav-link"><i class="fab fa-instagram"></i></a>
+            </li>
+        </ul>
+    </div>
+</nav> <br>
+{% endblock %}
+
+{% block body %}
+<body id="index-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                        </div>
+                    {% endif %}
+
+                    <h1>Veuillez vous connecter</h1>
+                    <label for="inputEmail">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                    <input type="hidden" name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                    >
+
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button> <br>
+                    <div class="mb-3">
+                        Pas encore inscrit ? <a href="{{ path('app_register') }}">Inscrivez-vous maintenant</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

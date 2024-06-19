@@ -1,0 +1,264 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .table td, .table th {
+            vertical-align: middle;
+        }
+        .table {
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            
+        }
+        .table thead tr {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .table tbody tr:last-child {
+            border-bottom: 2px solid #343a40;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #343a40;
+        }
+        html body {
+            background-color: #ffffff;
+        }
+        .navbar-custom {
+            background-color: #87CEEB;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .navbar-custom .navbar-nav .nav-item {
+            margin-right: 1rem;
+        }
+        .navbar-custom .fab {
+            font-size: 1.5em;
+        }
+       .btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+
+.btn:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+      
+        .btn-add {
+            background-color: #007bff;
+            color: #fff;
+            
+        }
+        .btn-primary {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.btn-primary:hover {
+    background-color: #0069D9;
+    color: white;
+}
+#order-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+        .styled-phrase {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #007BFF;
+            text-align: center;
+            margin-bottom: 2em;
+        }
+     .animated-phrase {
+    animation: slideIn 2s ease-in-out forwards; /* Add forwards here */
+    opacity: 0;
+    font-size: 2em;
+   
+    text-align: center;
+    font-weight: bold;
+    margin: 0 auto;
+    width: 80%;
+     color: #000000; /* Change this line */
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+        .btn-empty {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            float: left; /* Pour aligner le bouton à droite */
+        }
+         .btn-empty:hover {
+            background-color: #0000ff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-empty:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+          @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translate3d(0, 100%, 0);
+            }
+            100% {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        h1 {
+            animation: fadeInUp 1.5s;
+        }
+    </style>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="/">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{{ path('app_index') }}" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+             <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+        <li class="nav-item mx-2">
+                <a href="{{ path('cart_index') }}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="/logout" class="nav-link" style="font-size: 1.2em;">Déconnexion</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav> <br>
+{% endblock %}
+{% block body %}
+    
+    <h1> Votre Panier </h1>
+
+    {% if dataPanier is not empty %}
+     
+        <div class="table-responsive"> <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Taille</th>
+                        <th scope="col">Prix</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col" colspan="2">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in dataPanier %}
+                        <tr>
+                            <td>{{ item.produit.nom }}</td>
+                            <td>{{ item.produit.taille }}</td>
+                            <td>{{ item.produit.prix }} €</td>
+                            <td>{{ item.quantite }}</td>
+                            <td>{{ item.produit.prix * item.quantite }} €</td>
+                            <td class="align-middle">
+    <a href="{{ path('cart_add', {id: item.produit.id}) }}" class="btn btn-add">Ajouter</a>
+    <a href="{{ path('cart_remove', {id: item.produit.id}) }}" class="btn btn-delete">Supprimer</a>
+</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{{ path('delete_all') }}" class="btn-empty">Vider le panier</a> 
+       <p class="text-right total">Total: <strong>{{ total }} €</strong></p> <br>
+<button id="order-button" class="btn btn-primary">Passer une commande</button>
+        <div id="animated-phrase" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90%; max-width: 800px; height: 200px; background: #f2f2f2; text-align: center; padding: 50px; box-shadow: 0 0 20px rgba(0,0,0,0.2); border-radius: 10px; font-size: 20px;">
+    Cher {{ user.Prenom }} {{ user.Nom }}, merci pour votre confiance. L'équipe de Maryouli est en train de préparer votre commande et vous contactera prochainement. Restez à l'écoute !
+</div>
+
+
+       <script>
+        document.getElementById('order-button').addEventListener('click', function() {
+            document.getElementById('animated-phrase').style.display = 'block';
+            setTimeout(function() {
+                window.location.href = '/affiche/produit'; // Remplacez '/' par l'URL de votre page d'accueil si elle est différente
+            }, 5000); // Redirige après 5 secondes
+        });
+    </script>
+        
+
+    {% else %}
+        <p>Votre panier est vide.</p>
+    {% endif %}
+{% endblock %}

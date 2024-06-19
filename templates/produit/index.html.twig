@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un produit{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+   
+    html body {
+            background-color: #ffffff;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+   .navbar-custom {
+        background-color: #87CEEB;
+    }
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+        font-size: 1.2em;
+    }
+    .navbar-custom .navbar-nav .nav-item {
+        margin-right: 1rem;
+    }
+    .navbar-custom .fab {
+        font-size: 1.5em;
+    }
+
+.example-wrapper {
+    background: #e8f0fe; /* Couleur de fond bleu clair */
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+    </style>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item mx-2">
+                <a class="nav-link" href="{{ path('app_gestion_produit') }}" style="font-size: 1.2em;">Gestion des produits</a>
+            </li>
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{{ path('app_produit') }}" style="font-size: 1.2em;">Ajouter produit <span class="sr-only">(current)</span></a>
+            </li>
+            
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="{{ path('app_gestion_utilisateurs') }}" style="font-size: 1.2em;">Gestion des utilisateurs</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-2">
+                <a href="{{ path('app_index') }}" class="nav-link" style="font-size: 1.2em;">Espace client</a>
+            </li>
+        </ul>
+    </div>
+</nav> <br>
+{% endblock %}
+{% block body %}
+<body id="index-page">
+
+    
+<div class="example-wrapper">
+{{ form(form) }}
+</div>
+</body>
+{% endblock %}

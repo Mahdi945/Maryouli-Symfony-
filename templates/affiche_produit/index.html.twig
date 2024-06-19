@@ -1,0 +1,203 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MAILLOTS DE FOOTBALL OFFICIEL{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .navbar-custom {
+            background-color: #87CEEB;
+        }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .navbar-nav .nav-link {
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .navbar-custom .navbar-nav .nav-item {
+            margin-right: 1rem;
+        }
+        .navbar-custom .fab {
+            font-size: 1.5em;
+        }
+        .product-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+            height: 100%;
+        }
+        .product-card:hover {
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+        }
+        .product-card-body {
+            padding: 15px;
+        }
+        .product-card-body h5 {
+            margin: 0 0 10px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        html body {
+            background-color: #ffffff;
+        }
+   
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #f8f9fa; /* Couleur de fond pour la barre de recherche */
+            padding: 20px; /* Espace autour des éléments de la barre de recherche */
+            border-radius: 10px; /* Bords arrondis pour la barre de recherche */
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1); /* Ombre pour la barre de recherche */
+        }
+        .search-bar .form-group {
+            display: inline-block;
+            width: auto;
+            max-width: 300px;
+            margin: 0 10px;
+        }
+        .search-bar .form-control,
+        .search-bar select {
+            height: 50px; /* Hauteur augmentée pour l'input et le select */
+            padding: 10px; /* Padding ajouté à l'input et au select */
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1);
+            background-color: #ffffff; /* Couleur de fond pour l'input et le select */
+            border: 1px solid #ced4da; /* Couleur de bordure pour l'input et le select */
+        }
+       .search-bar .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            font-size: 1.1em;
+            border-radius: 20px; /* Bordures arrondies comme l'input et le select */
+            border: 1px solid #ced4da; /* Bordure comme l'input et le select */
+            box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.1); /* Ombre comme l'input et le select */
+            padding: 10px 20px; /* Ajustez le padding si nécessaire */
+            margin-left: 20px; /* Espace à gauche du bouton */
+        }
+        .search-bar .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .add-to-cart-button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+          .animated-text {
+        font-size: 2em;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+        from, to { border-color: transparent; }
+        50% { border-color: black; }
+    }
+   
+    </style>
+{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <a class="navbar-brand" href="/">
+        <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{{ path('app_index') }}" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+             <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+        <li class="nav-item mx-2">
+                <a href="{{ path('cart_index') }}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+            </li>
+            <li class="nav-item mx-2">
+                <a href="/logout" class="nav-link" style="font-size: 1.2em;">Déconnexion</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+
+
+{% block body %}
+<div class="container">
+    <h1 class="my-4 animated-text">MAILLOTS DE FOOTBALL OFFICIEL</h1> <br>
+
+    <div class="search-bar">
+        <form method="GET" action="{{ path('app_affiche_produit') }}">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher par nom">
+            </div>
+            <div class="form-group">
+                <select name="taille" class="form-control">
+                    <option value="">Toutes les tailles</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="S">S</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </form>
+    </div>
+
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4 mb-4">
+            <div class="product-card">
+                <img src="/uploads/images/{{ article.photo }}" alt="{{ article.nom }}">
+                <div class="product-card-body">
+                    <h5 class="card-title">{{ article.nom }}</h5>
+                    <p class="card-text">Prix: {{ article.prix }} €</p>
+                    <p class="card-text">Taille: {{ article.taille }}</p>
+                    <p class="card-text">Équipe: {{ article.equipe }}</p>
+                    <form action="{{ path('cart_add', {id: article.id}) }}" method="post">
+                        <input type="submit" value="Ajouter au panier" class="add-to-cart-button">
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

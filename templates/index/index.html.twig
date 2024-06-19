@@ -1,0 +1,210 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Maillots Sportifs{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  #index-page {
+            background: url('/images/cap8.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    .navbar-custom {
+        background-color: #87CEEB;
+    }
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff;
+        font-size: 1.2em;
+    }
+    .navbar-custom .navbar-nav .nav-item {
+        margin-right: 1rem;
+    }
+    .navbar-custom .fab {
+        font-size: 1.5em;
+    }
+    .carousel-item img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+    }
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .product-card {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+        height: 100%;
+    }
+    .product-card:hover {
+        box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    }
+    .product-card img {
+        width: 100%;
+        height: auto;
+    }
+    .product-card-body {
+        padding: 15px;
+    }
+    .product-card-body h5 {
+        margin: 0 0 10px;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+    .login-register-buttons {
+        text-align: center;
+        margin-top: 20px;
+    }
+  .d-block.w-100 {
+    width: 100%;  /* La largeur de l'image sera toujours de 100% de la largeur de son conteneur */
+    max-height: 500px;  /* Ajustez cette valeur en fonction de la hauteur souhaitée */
+    object-fit: contain;  /* L'image sera redimensionnée pour être entièrement visible dans son conteneur */
+}
+.carousel-inner {
+    background: transparent;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+<body id="index-page">
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="{{ path('app_login') }}">
+            <img src="/images/capture1.png" width="170" height="60" class="d-inline-block align-top" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active mx-2">
+                    <a class="nav-link" href="{{ path('app_index') }}" style="font-size: 1.2em;">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                 <li class="nav-item mx-2">
+        <a class="nav-link" href="{{ path('app_affiche_produit') }}" style="font-size: 1.2em;">Produits</a>
+    </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="/contact" style="font-size: 1.2em;">Contact</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-2">
+                    <a href="{{ path('app_login') }}" class="nav-link" style="font-size: 1.2em;">Se connecter</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="{{ path('app_register') }}" class="nav-link" style="font-size: 1.2em;">S'inscrire</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="https://www.facebook.com" target="_blank" class="nav-link"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a href="https://www.instagram.com" target="_blank" class="nav-link"><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </nav> <br>
+
+<div class="container">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+          
+                <img src="/images/tunisiee.png" class="d-block w-100" alt="Maillot 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Nouveaux Maillots</h5>
+                    <p>Découvrez nos derniers modèles de maillots sportifs.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/italie.png" class="d-block w-100" alt="Maillot 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Collection 2024</h5>
+                    <p>Les maillots de la nouvelle saison sont arrivés.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/images/japon.png" class="d-block w-100" alt="Maillot 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+             <div class="carousel-item">
+                <img src="/images/belgique.png" class="d-block w-100" alt="Maillot 4">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+              <div class="carousel-item">
+                <img src="/images/france.png" class="d-block w-100" alt="Maillot 5">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+              <div class="carousel-item">
+                <img src="/images/nigeria.png" class="d-block w-100" alt="Maillot 6">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+              <div class="carousel-item">
+                <img src="/images/argentine.png" class="d-block w-100" alt="Maillot 7">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+              <div class="carousel-item">
+                <img src="/images/allemagne.png" class="d-block w-100" alt="Maillot 8">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Offres Spéciales</h5>
+                    <p>Profitez de nos promotions sur une sélection de maillots.</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Précédent</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Suivant</span>
+        </a>
+    </div>
+</div>
+</body>
+{% endblock %}
+
